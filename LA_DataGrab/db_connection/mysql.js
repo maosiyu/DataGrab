@@ -4,18 +4,15 @@ var emitter = new EventEmitter();
 var Config = require('./config');
 var mysql = require('mysql');
 var pool;
-// 将属性添加到当前对象(这样其它js文件就可以访问到了)
 
-if (pool)
-    return;
-/**g ggit
+/**
  * 配置连接池
  */
 pool = mysql.createPool({
-    database: Config.mysqlDatabase,
     host: Config.mysqlHost,
     port: Config.mysqlPort,
     user: Config.mysqlUser,
+    database: Config.mysqlDatabase,
     password: Config.mysqlPassword
 });
 

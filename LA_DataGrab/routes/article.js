@@ -9,7 +9,7 @@ var redisClient = require('../db_connection/redis');
 var rule = new schedule.RecurrenceRule();
 rule.minute = [];
 for (var i = 0; i < 60; i++) {
-    if(i % 5 === 0)
+    if (i % 5 === 0)
         rule.minute.push(i);
 }
 var j = schedule.scheduleJob(rule, function () {
@@ -18,7 +18,7 @@ var j = schedule.scheduleJob(rule, function () {
 
 var loadData = function () {
 
-    var sql = "SELECT CONCAT('https://www.housecenter.cn/lease/info?id=', ID) AS name, CONCAT('" + Config.serverUrl + "/lease/info?id=', ID) AS 'url' FROM cms_article";
+    var sql = "SELECT CONCAT('https://www.housecenter.cn/view-', category_id,'-', id, '.html') AS name, CONCAT('" + Config.serverUrl + "/view-', category_id,'-', id, '.html') AS url FROM cms_article";
     mySqlQuery(sql, function (err, rows) {
 
         /**

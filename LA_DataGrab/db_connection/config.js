@@ -4,14 +4,14 @@
 var Config = function () {
 };
 // mysql config
-Config.mysqlDatabase = 'dlfc';
-Config.mysqlHost = '10.32.156.225';
-Config.mysqlPort = '';
-Config.mysqlUser = '';
-Config.mysqlPassword = '';
+Config.mysqlDatabase = 'clear';
+Config.mysqlHost = '10.32.156.224';
+Config.mysqlPort = '3306';
+Config.mysqlUser = 'rep1';
+Config.mysqlPassword = 'mysql';
 // redis config
 Config.redisHost = '10.32.156.156';
-Config.redisPort = '';
+Config.redisPort = '6379';
 // 服务器url地址
 Config.serverUrl = '10.32.156.154:8080';
 
