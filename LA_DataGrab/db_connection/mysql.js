@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 var Config = require('./config');
 var mysql = require('mysql');
+var Log = require('./log');
 var pool;
 
 /**
@@ -20,7 +21,7 @@ pool = mysql.createPool({
 pool.getConnection(function (err, connection) {
     if (err)
         throw  'mysql 数据库链接 FAIL! \n' + err;
-    console.log('mysql 数据库链接 SUCCESS!');
+    Log.info('mysql 数据库链接 SUCCESS!');
     connection.release();
 });
 

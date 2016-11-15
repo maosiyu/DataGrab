@@ -1,1 +1,1 @@
-var init = require('./routes/index');
+require('./routes/index');

@@ -1,4 +1,5 @@
 /* =-=-=-=-=-=-=-=-=-= 此文件是链接 redis 的配置文件 =-=-=-=-=-=-=-=-=-=-= */
+var Log = require('./log');
 var redis = require('redis');
 var Config = require('./config');
 var redisClient = redis.createClient({
@@ -6,10 +7,10 @@ var redisClient = redis.createClient({
     'port': Config.redisPort
 });
 redisClient.on("error", function (err) {
-    console.log("Error " + err);
+    Log.error("Error " + err);
     redisClient.quit();
 });
 redisClient.on("connect", function () {
-    console.log('redis 数据库链接 SUCCESS!');
+    Log.info('redis 数据库链接 SUCCESS!');
 });
 module.exports = redisClient;

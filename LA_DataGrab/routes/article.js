@@ -2,6 +2,7 @@
 var Bagpipe = require('bagpipe');
 var util = require('./utils.js');
 var schedule = require('node-schedule');
+var Log = require('../db_connection/log');
 var Config = require('../db_connection/config');
 var mySqlQuery = require('../db_connection/mysql');
 var redisClient = require('../db_connection/redis');
@@ -46,3 +47,5 @@ var replacRuleHandle = function (data) {
         .replace(/href="\//g, 'href="' + ruleContent)
         .replace(/background:url\(\//g, 'background:url(' + ruleContent);
 }
+
+Log.info('咨询 模块加载成功!');

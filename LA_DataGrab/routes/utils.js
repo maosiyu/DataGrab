@@ -3,10 +3,12 @@
  * 共通下载工具类
  * @param object 实现类的 类对象
  */
+
 var fs = require('fs');
 var path = require('path');
 var Bagpipe = require('bagpipe');
 var superagent = require('superagent');
+var Log = require('../db_connection/log');
 var redisClient = require('../db_connection/redis');
 
 var Util = function () {
@@ -33,7 +35,7 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
         bagpipe.push(Util.downLoadHtml, targetUrls[i].url, targetUrls[i].name, downLoadType, replacRuleHandle, function (err, htmlName, downLoadType, resultData) {
             // 异步回调执行
             if (err) {
-                console.error(err);
+                Log.error(err);
                 return;
             }
             // 生成的文件名, 要生成的文件内容
@@ -69,7 +71,7 @@ Util.localWriteFile = function (fileName, fileContent) {
     // 将文件写到硬盘
     fs.writeFile(path.join(__dirname, fileName), fileContent, function (err) {
         if (err) throw err;
-        console.info("fileName: " + fileName + " Export Account Success!");
+        Log.debug("fileName: " + fileName + " Export Account Success!");
     });
 };
 
@@ -81,7 +83,7 @@ Util.localWriteFile = function (fileName, fileContent) {
  */
 Util.redisWriteFile = function (key, value) {
     redisClient.set(key, value, function (err, reply) {
-        console.log(key + ' <===:-:===> ' + reply.toString());
+        Log.debug(key + ' <===:-:===> ' + reply.toString());
     });
     // redisClient.get(key, function (err, reply) {
     //     console.log(reply.toString());

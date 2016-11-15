@@ -1,8 +1,9 @@
 // 抓取首页
 var Bagpipe = require('bagpipe');
 var util = require('./utils.js');
-var Config = require('../db_connection/config');
 var schedule = require('node-schedule');
+var Log = require('../db_connection/log');
+var Config = require('../db_connection/config');
 var redisClient = require('../db_connection/redis');
 
 // 如何每隔 15 分钟、 30 分钟执行一次任务呢？
@@ -49,3 +50,4 @@ var replacRuleHandle = function (data) {
         .replace(/href="\//g, 'href="' + ruleContent)
         .replace(/background:url\(\//g, 'background:url(' + ruleContent);
 }
+Log.info('首页 模块加载成功!');
