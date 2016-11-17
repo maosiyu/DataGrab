@@ -45,7 +45,7 @@ var replacRuleHandle = function (data) {
     if (!data)
         throw 'data 不存在！';
 
-    var ruleContent = 'https://www.housecenter.cn/';
+    var ruleContent = Config.resourceUrl;
     return data.replace(/src="\//g, 'src="' + ruleContent)
         .replace(/href="\//g, 'href="' + ruleContent)
         .replace(/background:url\(\//g, 'background:url(' + ruleContent);

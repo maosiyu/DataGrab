@@ -10,7 +10,7 @@ var redisClient = require('../db_connection/redis');
 var rule = new schedule.RecurrenceRule();
 rule.minute = [];
 for (var i = 0; i < 60; i++) {
-    if(i % 5 === 0)
+    if (i % 5 === 0)
         rule.minute.push(i);
 }
 var j = schedule.scheduleJob(rule, function () {
@@ -42,7 +42,7 @@ var replacRuleHandle = function (data) {
     if (!data)
         throw 'data 不存在！';
 
-    var ruleContent = 'https://www.housecenter.cn/';
+    var ruleContent = Config.resourceUrl;
     return data.replace(/src="\//g, 'src="' + ruleContent)
         .replace(/href="\//g, 'href="' + ruleContent)
         .replace(/background:url\(\//g, 'background:url(' + ruleContent);
