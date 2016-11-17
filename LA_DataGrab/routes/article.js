@@ -8,11 +8,11 @@ var mySqlQuery = require('../db_connection/mysql');
 var redisClient = require('../db_connection/redis');
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = [54];
-// for (var i = 0; i < 60; i++) {
-//     if (i % 5 === 0)
-//         rule.minute.push(i);
-// }
+rule.minute = [];
+for (var i = 0; i < 60; i++) {
+    if (i % 5 === 0)
+        rule.minute.push(i);
+}
 var j = schedule.scheduleJob(rule, function () {
     loadData();
 });
