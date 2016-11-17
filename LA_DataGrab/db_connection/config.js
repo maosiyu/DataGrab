@@ -8,7 +8,7 @@ Config.mysqlDatabase = 'clear';
 Config.mysqlHost = '10.32.156.224';
 Config.mysqlPort = '3306';
 Config.mysqlUser = 'rep1';
-Config.mysqlPassword = 'msyql';
+Config.mysqlPassword = 'mysql';
 // redis config
 Config.redisHost = '10.32.156.156';
 Config.redisPort = '6379';
