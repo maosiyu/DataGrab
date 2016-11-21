@@ -25,7 +25,7 @@ var j = schedule.scheduleJob(rule, function () {
 });
 
 var loadData = function () {
-    var targetUrls = [{url: Config.serverUrl, name: 'https://www.housecenter.cn/'}];
+    var targetUrls = [{url: Config.serverUrl, name: Config.resourceUrl}];
     /**
      * 下载
      * @param targetUrls [{url: 'http://', name: ''}, {url: 'https://', name: ''}]

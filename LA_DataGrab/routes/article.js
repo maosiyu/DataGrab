@@ -19,7 +19,7 @@ var j = schedule.scheduleJob(rule, function () {
 
 var loadData = function () {
 
-    var sql = "SELECT CONCAT('https://www.housecenter.cn/view-', category_id,'-', id, '.html') AS name, CONCAT('" + Config.serverUrl + "/view-', category_id,'-', id, '.html') AS url FROM cms_article";
+    var sql = "SELECT CONCAT('" + Config.resourceUrl + "view-', category_id,'-', id, '.html') AS name, CONCAT('" + Config.serverUrl + "/view-', category_id,'-', id, '.html') AS url FROM cms_article";
     mySqlQuery(sql, function (err, rows) {
 
         /**
