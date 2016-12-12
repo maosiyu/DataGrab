@@ -23,19 +23,19 @@ var Util = function () {
 Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
 
     if (!targetUrls)
-        throw '/routes/utils.js ===> targetUrls 不能为空！';
+        throw 'Util.load =:|=====> targetUrls 不能为空！';
     if (!downLoadType)
-        throw '/routes/utils.js ===> downLoadType 不能为空！';
+        throw 'Util.load =:|=====> downLoadType 不能为空！';
     if (!replacRuleHandle)
-        throw '/routes/utils.js ===> replacRuleHandle 不能为空！';
+        throw 'Util.load =:|=====> replacRuleHandle 不能为空！';
 
-    // 最大并发数为20
-    var bagpipe = new Bagpipe(50);
+    // 最大并发数为500
+    var bagpipe = new Bagpipe(500);
     for (var i = 0; i < targetUrls.length; i++) {
-        if (!targetUrls[i]) throw '/routes/utils.js ===> targetUrls[' + i + ']';
+        if (!targetUrls[i]) throw 'Util.load =:|=====> targetUrls[' + i + ']';
         bagpipe.push(Util.downLoadHtml, targetUrls[i].url, targetUrls[i].name, downLoadType, replacRuleHandle, function (err, htmlName, downLoadType, resultData) {
             // 异步回调执行
-            if (err) throw err;
+            if (err) throw 'Util.load =:|=====> ' + err;
             // 生成的文件名, 要生成的文件内容
             Util[downLoadType](htmlName, resultData);
         });
@@ -43,7 +43,7 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
 };
 
 /**
- * 抓取页面
+ * 抓取页面 downLoadHtml
  * @param url 抓取的页面地址
  * @param htmlName 要生成的文件名
  * @param downLoadType 以哪种方式生成 例如: 使用Redis: redisWriteFile, 使用本地流:localWriteFile
@@ -54,7 +54,7 @@ Util.downLoadHtml = function (url, htmlName, downLoadType, replacRuleHandle, cal
 
     superagent.get(url).end(function (err, response) {
         if (!response)
-            throw '/routes/utils.js ===> superagent -> response 没有数据！';
+            throw 'Util.downLoadHtml =:|=====> response 没有数据！';
         callback(null, htmlName, downLoadType, replacRuleHandle(response.text));
     });
 };
@@ -68,7 +68,7 @@ Util.localWriteFile = function (fileName, fileContent) {
 
     // 将文件写到硬盘
     fs.writeFile(path.join(__dirname, fileName), fileContent, function (err) {
-        if (err) throw err;
+        if (err) throw 'Util.localWriteFile =:|=====> ' + err;
         Log.debug("fileName: " + fileName + " Export Account Success!");
     });
 };
@@ -81,7 +81,7 @@ Util.localWriteFile = function (fileName, fileContent) {
  */
 Util.redisWriteFile = function (key, value) {
     redisClient.set(key, value, function (err, reply) {
-        if (err) throw err;
+        if (err) throw 'Util.redisWriteFile =:|=====> ' + err;
         if (!reply)
             throw '向redis数据库写文件时返回值为: ' + reply;
         Log.debug(key + ' <===:-:===> ' + reply.toString());

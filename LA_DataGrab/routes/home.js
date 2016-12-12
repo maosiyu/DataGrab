@@ -43,7 +43,7 @@ var loadData = function () {
 var replacRuleHandle = function (data) {
 
     if (!data)
-        throw 'data 不存在！';
+        throw 'home.js --> replacRuleHandle =:|=====> data 不存在！';
 
     var ruleContent = Config.resourceUrl;
     return data.replace(/src="\//g, 'src="' + ruleContent)

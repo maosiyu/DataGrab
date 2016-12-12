@@ -22,6 +22,7 @@ var loadData = function () {
     var sql = "SELECT CONCAT('" + Config.resourceUrl + "view-', category_id,'-', id, '.html') AS name, CONCAT('" + Config.serverUrl + "/view-', category_id,'-', id, '.html') AS url FROM cms_article";
     mySqlQuery(sql, function (err, rows) {
 
+        if (err) throw 'article.js --> mySqlQuery =:|=====> ' + err;
         /**
          * 下载
          * @param targetUrls [{url: 'http://', name: ''}, {url: 'https://', name: ''}]
@@ -40,7 +41,7 @@ var loadData = function () {
 var replacRuleHandle = function (data) {
 
     if (!data)
-        throw 'data 不存在！';
+        throw 'article.js --> replacRuleHandle =:|=====>  data 不存在！';
 
     var ruleContent = Config.resourceUrl;
     return data.replace(/src="\//g, 'src="' + ruleContent)

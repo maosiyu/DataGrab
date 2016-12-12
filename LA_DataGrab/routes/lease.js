@@ -22,6 +22,7 @@ var loadData = function () {
     var sql = "SELECT CONCAT('" + Config.resourceUrl + "lease/info?id=', l.ID) AS name, CONCAT('" + Config.serverUrl + "/lease/info?id=', l.ID) AS 'url' FROM HOU_HOUSE_INFO H, HOU_LEASE_INFO L WHERE H.ID = L.HID AND L.RELEASE_STATUS = 1 AND L.AUDIT_STATUS <> 2 AND H.AUDIT_STATUS = 2 AND H.ACTIVE_STATUS = 1 AND H.LOCK_STATUS = 0 AND L.DELETE_FLG = 0 AND H.DELETE_FLG = 0";
     mySqlQuery(sql, function (err, rows) {
 
+        if (err) throw 'lease.js --> mySqlQuery =:|=====> ' + err;
         /**
          * 下载
          * @param targetUrls [{url: 'http://', name: ''}, {url: 'https://', name: ''}]
@@ -40,7 +41,7 @@ var loadData = function () {
 var replacRuleHandle = function (data) {
 
     if (!data)
-        throw 'data 不存在！';
+        throw 'lease.js --> replacRuleHandle =:|=====> data 不存在！';
 
     var ruleContent = Config.resourceUrl;
     return data.replace(/src="\//g, 'src="' + ruleContent)
