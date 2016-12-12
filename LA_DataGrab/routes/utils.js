@@ -53,6 +53,7 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
 Util.downLoadHtml = function (url, htmlName, downLoadType, replacRuleHandle, callback) {
 
     superagent.get(url).end(function (err, response) {
+        if (err) throw 'Util.downLoadHtml =:|=====> ' + url + ' =:|=====> ' + err;
         if (!response)
             throw 'Util.downLoadHtml =:|=====> ' + url + ' =:|=====> response 没有数据！';
         callback(null, htmlName, downLoadType, replacRuleHandle(response.text));
