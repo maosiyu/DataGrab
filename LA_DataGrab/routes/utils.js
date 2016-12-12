@@ -30,7 +30,7 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
         throw 'Util.load =:|=====> replacRuleHandle 不能为空！';
 
     // 最大并发数为500
-    var bagpipe = new Bagpipe(500);
+    var bagpipe = new Bagpipe(50);
     for (var i = 0; i < targetUrls.length; i++) {
         if (!targetUrls[i]) throw 'Util.load =:|=====> targetUrls[' + i + ']';
         bagpipe.push(Util.downLoadHtml, targetUrls[i].url, targetUrls[i].name, downLoadType, replacRuleHandle, function (err, htmlName, downLoadType, resultData) {
@@ -54,7 +54,7 @@ Util.downLoadHtml = function (url, htmlName, downLoadType, replacRuleHandle, cal
 
     superagent.get(url).end(function (err, response) {
         if (!response)
-            throw 'Util.downLoadHtml =:|=====> response 没有数据！';
+            throw 'Util.downLoadHtml =:|=====> ' + url + ' =:|=====> response 没有数据！';
         callback(null, htmlName, downLoadType, replacRuleHandle(response.text));
     });
 };

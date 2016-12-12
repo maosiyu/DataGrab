@@ -4,11 +4,11 @@
 var Config = function () {
 };
 // mysql config
-Config.mysqlDatabase = 'clear';
-Config.mysqlHost = '10.32.156.224';
+Config.mysqlDatabase = 'dlfc';
+Config.mysqlHost = '10.32.156.159';
 Config.mysqlPort = '3306';
-Config.mysqlUser = 'rep1';
-Config.mysqlPassword = 'mysql';
+Config.mysqlUser = 'dlfc';
+Config.mysqlPassword = '6npoa6l6';
 // redis config
 Config.redisHost = '10.32.156.156';
 Config.redisPort = '6379';

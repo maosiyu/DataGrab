@@ -15,7 +15,7 @@ var redisClient = require('../db_connection/redis');
 // 代码如下:
 //     rule.minute = [0, 30];
 var rule = new schedule.RecurrenceRule();
-rule.minute = [];
+rule.minute = [04];
 for (var i = 0; i < 60; i++) {
     if (i % 5 === 0)
         rule.minute.push(i);
