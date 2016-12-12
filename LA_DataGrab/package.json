@@ -6,6 +6,7 @@
   "dependencies": {
     "bagpipe": "^0.3.5",
     "fs": "0.0.1-security",
+    "moment": "^2.16.0",
     "mysql": "^2.12.0",
     "node-schedule": "^1.2.0",
     "path": "^0.12.7",

@@ -32,12 +32,10 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
     // 最大并发数为20
     var bagpipe = new Bagpipe(50);
     for (var i = 0; i < targetUrls.length; i++) {
+        if (!targetUrls[i]) throw '/routes/utils.js ===> targetUrls[' + i + ']';
         bagpipe.push(Util.downLoadHtml, targetUrls[i].url, targetUrls[i].name, downLoadType, replacRuleHandle, function (err, htmlName, downLoadType, resultData) {
             // 异步回调执行
-            if (err) {
-                Log.error(err);
-                return;
-            }
+            if (err) throw err;
             // 生成的文件名, 要生成的文件内容
             Util[downLoadType](htmlName, resultData);
         });
@@ -55,7 +53,7 @@ Util.load = function (targetUrls, downLoadType, replacRuleHandle) {
 Util.downLoadHtml = function (url, htmlName, downLoadType, replacRuleHandle, callback) {
 
     superagent.get(url).end(function (err, response) {
-        if(!response)
+        if (!response)
             throw '/routes/utils.js ===> superagent -> response 没有数据！';
         callback(null, htmlName, downLoadType, replacRuleHandle(response.text));
     });
@@ -83,6 +81,9 @@ Util.localWriteFile = function (fileName, fileContent) {
  */
 Util.redisWriteFile = function (key, value) {
     redisClient.set(key, value, function (err, reply) {
+        if (err) throw err;
+        if (!reply)
+            throw '向redis数据库写文件时返回值为: ' + reply;
         Log.debug(key + ' <===:-:===> ' + reply.toString());
     });
     // redisClient.get(key, function (err, reply) {
