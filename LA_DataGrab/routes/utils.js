@@ -9,7 +9,7 @@ var path = require('path');
 var Bagpipe = require('bagpipe');
 var superagent = require('superagent');
 var Log = require('../db_connection/log');
-var redisClient = require('../db_connection/redis');
+var cluster = require('../db_connection/redisCluster');
 
 var Util = function () {
 };
@@ -81,13 +81,13 @@ Util.localWriteFile = function (fileName, fileContent) {
  * @param callback
  */
 Util.redisWriteFile = function (key, value) {
-    redisClient.set(key, value, function (err, reply) {
+    cluster.set(key, value, function (err, reply) {
         if (err) throw 'Util.redisWriteFile =:|=====> ' + err;
         if (!reply)
             throw '向redis数据库写文件时返回值为: ' + reply;
         Log.debug(key + ' <===:-:===> ' + reply.toString());
     });
-    // redisClient.get(key, function (err, reply) {
+    // cluster.get(key, function (err, reply) {
     //     console.log(reply.toString());
     // });
 };

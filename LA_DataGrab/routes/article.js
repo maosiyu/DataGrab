@@ -5,7 +5,6 @@ var schedule = require('node-schedule');
 var Log = require('../db_connection/log');
 var Config = require('../db_connection/config');
 var mySqlQuery = require('../db_connection/mysql');
-var redisClient = require('../db_connection/redis');
 
 var rule = new schedule.RecurrenceRule();
 rule.minute = [];
@@ -23,6 +22,8 @@ var loadData = function () {
     mySqlQuery(sql, function (err, rows) {
 
         if (err) throw 'article.js --> mySqlQuery =:|=====> ' + err;
+
+        Log.debug('咨询 共有 <' + rows.length + '> 条数据!');
         /**
          * 下载
          * @param targetUrls [{url: 'http://', name: ''}, {url: 'https://', name: ''}]

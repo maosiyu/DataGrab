@@ -10,8 +10,17 @@ Config.mysqlPort = '3306';
 Config.mysqlUser = 'dlfc';
 Config.mysqlPassword = '6npoa6l6';
 // redis config
-Config.redisHost = '10.32.156.156';
-Config.redisPort = '6379';
+// Config.redisHost = '10.32.156.156';
+// Config.redisPort = '6379';
+// redisCluster config
+Config.redisClusterOptions = [
+    {host: '10.32.156.123', port: 6380},
+    {host: '10.32.156.123', port: 7380},
+    {host: '10.32.156.167', port: 6380},
+    {host: '10.32.156.167', port: 7380},
+    {host: '10.32.156.168', port: 6380},
+    {host: '10.32.156.168', port: 7380}
+];
 // 资源文件路径
 Config.resourceUrl = 'https://www.housecenter.cn/';
 // 服务器url地址

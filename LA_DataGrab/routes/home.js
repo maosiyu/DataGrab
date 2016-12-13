@@ -4,7 +4,6 @@ var util = require('./utils.js');
 var schedule = require('node-schedule');
 var Log = require('../db_connection/log');
 var Config = require('../db_connection/config');
-var redisClient = require('../db_connection/redis');
 
 // 如何每隔 15 分钟、 30 分钟执行一次任务呢？
 // 比较关键的地方在于 rule.minute 是支持数组的，知道这一点就很好操作了
@@ -26,6 +25,7 @@ var j = schedule.scheduleJob(rule, function () {
 
 var loadData = function () {
     var targetUrls = [{url: Config.serverUrl, name: Config.resourceUrl}];
+
     /**
      * 下载
      * @param targetUrls [{url: 'http://', name: ''}, {url: 'https://', name: ''}]
