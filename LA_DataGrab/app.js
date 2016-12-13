@@ -8,6 +8,7 @@ process.on('exit', function (code) {
 });
 // 监听Node程序中所有未处理的异常
 process.on("uncaughtException", function (err) {
+    err = 'ErrorMessage: ' + err + '\n' + 'ErrorDate   : ' + moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
     Log.error('============================================= BEGIN ==========================================================');
     Log.error(err);
     // 以追加的方式 将文件写到硬盘的当前目录
