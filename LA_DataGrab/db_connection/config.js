@@ -9,9 +9,11 @@ Config.mysqlHost = '10.32.156.159';
 Config.mysqlPort = '3306';
 Config.mysqlUser = 'dlfc';
 Config.mysqlPassword = '6npoa6l6';
+// 0: redis, 1: redisCluster
+Config.redisSwitch = 1;
 // redis config
-// Config.redisHost = '10.32.156.156';
-// Config.redisPort = '6379';
+Config.redisHost = '10.32.156.156';
+Config.redisPort = '6379';
 // redisCluster config
 Config.redisClusterOptions = [
     {host: '10.32.156.123', port: 6380},

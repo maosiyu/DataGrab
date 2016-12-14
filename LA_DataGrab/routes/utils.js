@@ -9,7 +9,8 @@ var path = require('path');
 var Bagpipe = require('bagpipe');
 var superagent = require('superagent');
 var Log = require('../db_connection/log');
-var cluster = require('../db_connection/redisCluster');
+var Config = require('../db_connection/config');
+var redisORredisCluster = (Config.redisSwitch == 0) ? require('../db_connection/redis') : require('../db_connection/redisCluster');
 
 var Util = function () {
 };
@@ -81,13 +82,13 @@ Util.localWriteFile = function (fileName, fileContent) {
  * @param callback
  */
 Util.redisWriteFile = function (key, value) {
-    cluster.set(key, value, function (err, reply) {
+    redisORredisCluster.set(key, value, function (err, reply) {
         if (err) throw 'Util.redisWriteFile =:|=====> ' + err;
         if (!reply)
             throw '向redis数据库写文件时返回值为: ' + reply;
         Log.debug(key + ' <===:-:===> ' + reply.toString());
     });
-    // cluster.get(key, function (err, reply) {
+    // redisORredisCluster.get(key, function (err, reply) {
     //     console.log(reply.toString());
     // });
 };
